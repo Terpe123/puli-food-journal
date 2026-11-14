@@ -1,3 +1,4 @@
+
 "use strict";
 
 const restaurants = window.RESTAURANTS;
@@ -8,6 +9,7 @@ const restaurantList = document.querySelector("#restaurant-list");
 const searchInput = document.querySelector("#search");
 const resultCount = document.querySelector("#result-count");
 
+// 建立 HTML 元素
 function createElement(tag, text, className) {
   const element = document.createElement(tag);
 
@@ -22,6 +24,7 @@ function createElement(tag, text, className) {
   return element;
 }
 
+// 建立 Google Maps 連結
 function createMapLink(restaurant) {
   const link = createElement("a", "查看地圖 ↗");
 
@@ -36,6 +39,7 @@ function createMapLink(restaurant) {
   return link;
 }
 
+// 建立圖片
 function createImage(restaurant) {
   const image = document.createElement("img");
 
@@ -47,6 +51,7 @@ function createImage(restaurant) {
   return image;
 }
 
+// 建立食記文字區塊
 function createTextSection(title, text) {
   const section = createElement(
     "section",
@@ -62,32 +67,45 @@ function createTextSection(title, text) {
   return section;
 }
 
+// 搜尋店家並顯示卡片
 function renderCards() {
   const keyword = searchInput.value.trim().toLocaleLowerCase();
 
   const filtered = restaurants.filter((restaurant) => {
-    const text = [
+    // 將店家相關資料整理成搜尋文字
+    const searchableText = [
       restaurant.name,
-      restaurant.recommendedDish
-    ].join(" ").toLocaleLowerCase();
+      restaurant.recommendedDish,
+      restaurant.tagline,
+      restaurant.review,
+      restaurant.personalNote,
+      ...(restaurant.searchKeywords || [])
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLocaleLowerCase();
 
-    return text.includes(keyword);
+    return searchableText.includes(keyword);
   });
 
   restaurantList.replaceChildren();
+
   resultCount.textContent = `找到 ${filtered.length} 間店`;
 
+  // 沒有搜尋結果時顯示提示
   if (filtered.length === 0) {
     restaurantList.append(
       createElement(
         "p",
-        "找不到符合的店家，試試其他店名或餐點名稱吧！",
+        "找不到符合的店家，試試其他店名、餐點或類別關鍵字吧！",
         "empty-state"
       )
     );
+
     return;
   }
 
+  // 顯示搜尋結果
   for (const restaurant of filtered) {
     const card = createElement("article", undefined, "food-card");
 
@@ -119,29 +137,36 @@ function renderCards() {
     );
 
     const actions = createElement("div", undefined, "card-actions");
+
     const readLink = createElement("a", "閱讀食記", "button");
 
     readLink.href = `#${restaurant.slug}`;
+
     readLink.setAttribute(
       "aria-label",
       `閱讀${restaurant.name}的食記`
     );
 
     actions.append(readLink, createMapLink(restaurant));
+
     card.append(actions);
+
     restaurantList.append(card);
   }
 }
 
+// 顯示首頁
 function showHome() {
   homeView.hidden = false;
   detailView.hidden = true;
   detailView.replaceChildren();
 
   document.title = "埔里日常食記";
+
   renderCards();
 }
 
+// 顯示單間店家的食記
 function showDetail(slug) {
   const restaurant = restaurants.find(
     (item) => item.slug === slug
@@ -152,13 +177,17 @@ function showDetail(slug) {
   detailView.replaceChildren();
 
   const panel = createElement("article", undefined, "detail-panel");
+
   const backLink = createElement("a", "← 返回推薦名單", "back-link");
 
   backLink.href = "#";
+
   panel.append(backLink);
 
+  // 找不到店家時顯示錯誤訊息
   if (!restaurant) {
     const title = createElement("h1", "找不到這篇食記");
+
     title.id = "detail-title";
 
     panel.append(
@@ -170,11 +199,14 @@ function showDetail(slug) {
     );
 
     detailView.append(panel);
+
     document.title = "找不到食記｜埔里日常食記";
+
     return;
   }
 
   const title = createElement("h1", restaurant.name);
+
   title.id = "detail-title";
 
   panel.append(
@@ -187,6 +219,7 @@ function showDetail(slug) {
     panel.append(createImage(restaurant));
   }
 
+  // 店家基本資訊
   const infoBox = createElement("div", undefined, "info-box");
 
   infoBox.append(
@@ -217,6 +250,7 @@ function showDetail(slug) {
     createTextSection("我的小提醒", restaurant.personalNote)
   );
 
+  // 地圖區塊
   const mapSection = createElement(
     "section",
     undefined,
@@ -243,9 +277,11 @@ function showDetail(slug) {
   );
 
   detailView.append(panel);
+
   document.title = `${restaurant.name}｜埔里日常食記`;
 }
 
+// 根據網址決定顯示首頁或食記
 function renderRoute(moveFocus = false) {
   const slug = window.location.hash.slice(1);
 
@@ -262,14 +298,18 @@ function renderRoute(moveFocus = false) {
 
     title.tabIndex = -1;
     title.focus();
+
     window.scrollTo(0, 0);
   }
 }
 
+// 搜尋框輸入時即時更新結果
 searchInput.addEventListener("input", renderCards);
 
+// 網址變更時切換頁面
 window.addEventListener("hashchange", () => {
   renderRoute(true);
 });
 
+// 網頁載入時顯示正確頁面
 renderRoute();
