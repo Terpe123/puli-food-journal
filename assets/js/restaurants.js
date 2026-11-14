@@ -19,7 +19,7 @@ window.RESTAURANTS = [
     slug: "ge-zhi",
     name: "鴿至",
     recommendedDish: "白醬雞肉燉飯",
-    searchKeywords: ["麵", "麵類", "義大利麵", "燉飯", "飯"]
+    searchKeywords: ["麵", "麵類", "義大利麵", "燉飯", "飯"],
     tagline: "義大利麵與燉飯味道剛好，不會太淡，也不容易膩。",
     priceNote: "約 NT$200–300",
     review:
@@ -35,7 +35,7 @@ window.RESTAURANTS = [
     slug: "yokohama-ramen",
     name: "橫濱拉麵",
     recommendedDish: "地獄拉麵",
-    searchKeywords: ["麵", "麵類", "拉麵", "日式"]
+    searchKeywords: ["麵", "麵類", "拉麵", "日式"],
     tagline: "喜歡濃郁湯頭和充足分量時，我會想到這一間。",
     priceNote: "約 NT$200–300",
     review:
@@ -51,7 +51,7 @@ window.RESTAURANTS = [
     slug: "xiang-shi",
     name: "響食",
     recommendedDish: "天婦羅冷麵",
-    searchKeywords: ["麵", "麵類", "冷麵", "日式"]
+    searchKeywords: ["麵", "麵類", "冷麵", "日式"],
     tagline: "味道足、餐點精緻，是我在埔里吃宵夜的口袋選擇。",
     priceNote: "約 NT$150–300",
     review:
@@ -67,7 +67,7 @@ window.RESTAURANTS = [
     slug: "jia-jia-breakfast",
     name: "佳佳早點",
     recommendedDish: "起司蛋餅",
-    searchKeywords: ["早餐", "蛋餅"]
+    searchKeywords: ["早餐", "蛋餅"],
     tagline: "起司餡料飽滿，價格親切，分量也讓我滿意。",
     priceNote: "約 NT$100 以內",
     review:
@@ -83,7 +83,7 @@ window.RESTAURANTS = [
     slug: "si-he-yuan",
     name: "肆盒院",
     recommendedDish: "舒肥煎牛排早午餐",
-    searchKeywords: ["早午餐", "牛排", "健康"]
+    searchKeywords: ["早午餐", "牛排", "健康"],
     tagline: "想吃早午餐時，我喜歡這裡食材新鮮的感覺。",
     priceNote: "約 NT$300–600",
     review:
