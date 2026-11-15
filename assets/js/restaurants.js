@@ -1,4 +1,3 @@
-
 "use strict";
 
 window.RESTAURANTS = [
@@ -217,6 +216,44 @@ window.RESTAURANTS = [
 
     mapsUrl:
       "https://maps.app.goo.gl/w5aJvQuYPBd69H8M9?g_st=com.hammerandchisel.discord.Share",
+
+    image: null,
+    imageAlt: ""
+  },
+
+
+  // ========================================
+  // 7. 愛蘭早點達人
+  // ========================================
+
+  {
+    slug: "ai-lan-breakfast",
+    name: "愛蘭早點達人",
+
+    searchKeywords: [
+      "早餐",
+      "早點",
+      "咸油條",
+      "鹹油條",
+      "油條"
+    ],
+
+    recommendedDish: "咸油條加蛋",
+
+    tagline: "埔里知名的特色早點，咸油條本身就很讚，但口味因人而異。",
+
+    priceNote: "約 NT$100/每人",
+
+    review:
+      "我推薦愛蘭早點達人的咸油條加蛋。咸油條是埔里出名的特色早點，我覺得咸油條本身很讚。",
+
+    personalNote:
+      "咸油條的味道比較有特色，不是每個人都能接受，以上是我個人的口味看法。",
+
+    visitedAt: null,
+
+    mapsUrl:
+      "https://maps.app.goo.gl/rnScnUSWbzoaYwDq6?g_st=ic",
 
     image: null,
     imageAlt: ""
